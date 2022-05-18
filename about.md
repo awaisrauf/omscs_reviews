@@ -3,16 +3,6 @@ layout: page
 title: About
 permalink: /about/
 ---
+A hastly put, temporary website for OMSCS reviews. All the reviews are taken from omsceneral[https://omscentral.com/courses]. Thanks to Mehmat for making it available  in an easy to use format.
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
-
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
-
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
-
-
-[jekyll-organization]: https://github.com/jekyll
+Contributions are welcome on Github. If you want to contact me, please have a look at my[website](https://awaisrauf.github.io/).
