@@ -19,6 +19,7 @@ And then execute:
 - [ ] Cleaning up the code
 - [ ] Better looking view for ratings, workload, ..
 - [ ] Overall Statistics
+- [ ] Add aliases in home page
 - [ ] ...
 
 
