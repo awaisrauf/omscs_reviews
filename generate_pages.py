@@ -22,15 +22,34 @@ def get_courses_aliases(aliases: str) -> str:
 with open('_data/courses.json', 'r') as f:
   courses_data = json.load(f)
 
+with open('_data/my_avg_stats.json', 'r') as f:
+  courses_avg_stats = json.load(f)
+
 # gerenate header for each course and save it as md
 for course in courses_data:
+  
   course = dict(course)
+  # course data
   course_id = course['id']
   course_name = course['name']
   course_aliases = get_courses_aliases(course['aliases'])
 
-  content = f'---\nlayout: course\ntitle: {course_id} - {course_name}\naliases: {course_aliases}\ncourse_id: {course_id}\npermalink: /{course_id}/\n---'
-  print(content)
+  # course avg stats
+  if course_id in courses_avg_stats:
+    avg_diff = courses_avg_stats[course_id]['difficulty']
+    avg_rating = courses_avg_stats[course_id]['rating']
+    avg_workload = courses_avg_stats[course_id]['workload']
+  else:
+    avg_diff = 0
+    avg_rating = 0
+    avg_workload = 0
+
+  # page header
+  start = f'---\n'
+  body1 = f'layout: course\ntitle: {course_id} - {course_name}\naliases: {course_aliases}\ncourse_id: {course_id}\npermalink: /{course_id}/\n'
+  body2 = f'avg_difficulty: {avg_diff}\navg_rating: {avg_rating}\navg_workload: {avg_workload}\n'
+  end = '---'
+  content = start+body1+body2+end
 
   with open('courses/'+course['id']+".md", 'w') as f:
       f.write(content)

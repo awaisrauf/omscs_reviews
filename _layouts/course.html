@@ -53,32 +53,66 @@ layout: page
         
     }
     }
+    function get_semester_name(semester_id){
+        var semester_ = semester_id.split('-')
+        if (semester_[1] == '1'){
+            document.write('Spring, '+semester_[0])
+        }
+        else if (semester_[1] == '2'){
+            document.write('Summer, '+semester_[0])
+        }
+        else {
+            document.write('Fall, '+semester_[0])
+        }
+    }
 </script>
 
 </head>
 
 <body>
-    <!-- To get course title -->
-    <!-- {% for course in site.data.courses %}
-        {% if course.id == page.course_id %}
-            <h3> {{ course.id }} : {{ course.name }} </h3>
-        {% endif %}
-    {% endfor %}
-    
-    <br> -->
-
-
     <ul>
-    <div>
-       <h5> Course is also known as: {{ page.aliases }} </h5>
-       <br>
-    </div>
+
+    <!-- course stats -->
+    <table class ='table'>
+        <tr>
+            <th>
+                Aliases
+            </th>
+            <th>
+                Avg. Diff
+            </th>
+            <th>
+                Avg. Workload
+            </th>
+            <th>
+                Avg. Rating
+            </th>
+        </tr>
+        <tr>
+            <td>
+                {{ page.aliases }}
+            </td>
+            <td>
+                <script> colorize('{{ page.avg_difficulty }}', 'difficulty'); </script>
+            </td>
+            <td>
+                <script> colorize('{{ page.avg_workload }}', 'workload'); </script>
+            </td>
+            <td>
+                <script> colorize('{{ page.avg_rating }}', 'rating'); </script>
+            </td>
+        </tr>            
+        </tr>
+    </table>
+    <h3>Reviews</h3>
+    <br>
+    <!--  -->
     {% for member in site.data.reviews %}
         {% if member.course_id == page.course_id %}
             <div class="card">
                 <div class="mw-100">
                     <div class="card-header">
-                        Creation Time: {{ member.semester_id }}
+                        Semester: <script> get_semester_name('{{ member.semester_id }}') </script>
                     </div>
                     <div class="card-body">
                         <!-- TODO: AI Generated Title  -->
