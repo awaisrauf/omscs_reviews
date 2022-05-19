@@ -1,6 +1,15 @@
 ---
 layout: default
 ---
+<script>
+  // converts aliases str to useful one: '['A1', 'A2']' --> 'A1, A2'
+  function get_pretty_aliases(aliases){
+    var pretty_aliases = aliases.replace("[", "").replace("]", "")
+    var pretty_aliases = pretty_aliases.replaceAll("\"", "")
+    document.write(pretty_aliases)
+  }
+</script>
+
 <h1> Course Reviews </h1>
 {% assign depts = "CS, ECE, CSE, ISYE, MGT, PUBP, VIP" | split: ", " %}
 
@@ -17,7 +26,7 @@ layout: default
     Course Name
   </th>
   <th>
-     Link
+     Aliases
   </th>
 </tr>
 
@@ -28,10 +37,11 @@ layout: default
       {{ member.id }} 
     </td>
     <td>
-      {{ member.name }}
+      <a href="{{ member.id | relative_url }}"> {{ member.name }} </a>
     </td>  
     <td>
-      <a href="{{ member.id | relative_url }}"> Link </a>
+      <!-- {{ page.aliases }} -->
+      <script> get_pretty_aliases('{{ member.aliases }}') </script>
     </td>
   {% endif %}
   </tr>

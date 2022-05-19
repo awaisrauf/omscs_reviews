@@ -11,6 +11,7 @@ layout: page
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -23,48 +24,79 @@ layout: page
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 
+<!-- my functions -->
+<script>
+    function colorize(val, type) {
+    // document.write('<span class="badge rounded-pill text-bg-success"> Success </span>');
+    switch(type){
+        case 'difficulty':
+            if (val < 2) {
+                document.write('<span class="badge rounded-pill text-bg-success"> Difficulty: '+ val +'</span>')
+            } else {
+                document.write('<span class="badge rounded-pill text-bg-danger"> Difficulty: '+ val +'</span>')
+            }
+            break;
+        case 'workload':
+            if (val < 15) {
+                document.write('<span class="badge rounded-pill text-bg-success"> Workload: '+ val +'</span>')
+            } else {
+                document.write('<span class="badge rounded-pill text-bg-danger"> Workload: '+ val +'</span>')
+            }
+            break;
+        case 'rating':
+            if (val > 2 ) {
+                document.write('<span class="badge rounded-pill text-bg-success"> Rating: '+ val +'</span>')
+            } else {
+                document.write('<span class="badge rounded-pill text-bg-danger"> Rating: '+ val +'</span>')
+            }
+            break;
+        
+    }
+    }
+</script>
+
 </head>
 
 <body>
-    {% for course in site.data.courses %}
+    <!-- To get course title -->
+    <!-- {% for course in site.data.courses %}
         {% if course.id == page.course_id %}
             <h3> {{ course.id }} : {{ course.name }} </h3>
         {% endif %}
     {% endfor %}
     
-    <br>
+    <br> -->
 
 
     <ul>
-        {% for member in site.data.reviews %}
+    <div>
+       <h5> Course is also known as: {{ page.aliases }} </h5>
+       <br>
+    </div>
+    {% for member in site.data.reviews %}
         {% if member.course_id == page.course_id %}
-        <div class="card">
-            <div class="mw-100">
-                <div class="card-header">
-                    Creation Time: {{ member.semester_id }}
-                </div>
-                <div class="card-body">
-                    <!-- <h5 class="card-title">Special title treatment</h5> -->
-                    <p class="card-text">
-                        {{ member.body | markdownify }}
-                    </p>
-                    {% if member.difficulty < "2" %} <a href="#" class="btn btn-outline-primary"> Difficulty: {{
-                        member.difficulty }}</a>
-                        {% else %}
-                        <a href="#" class="btn btn-outline-danger"> Difficulty: {{ member.difficulty }}</a>
-                        {% endif %}
-                        {% if member.workload < "2" %} <a href="#" class="btn btn-outline-primary"> Workload: {{
-                            member.workload }}</a>
-                            {% else %}
-                            <a href="#" class="btn btn-outline-danger"> Difficulty: {{ member.difficulty }}</a>
-                        {% endif %}
-                    <a href="#" class="btn btn-outline-primary"> Rating: {{ member.rating }}</a>
+            <div class="card">
+                <div class="mw-100">
+                    <div class="card-header">
+                        Creation Time: {{ member.semester_id }}
+                    </div>
+                    <div class="card-body">
+                        <!-- TODO: AI Generated Title  -->
+                        <!-- <h5 class="card-title">AI Generated Title</h5> -->
+                        <!-- Course difficulty, etc -->
+                        <script> colorize('{{ member.difficulty }}', 'difficulty'); </script>
+                        <script> colorize('{{ member.workload }}', 'workload'); </script>
+                        <script> colorize('{{ member.rating }}', 'rating'); </script>
+                        <p class="card-text">
+                            {{ member.body | markdownify }}
+                        </p>
+     
+                    </div>
                 </div>
             </div>
-        </div>
-        <br>
-        {% endif %}
-        {% endfor %}
+            <br>
+            {% endif %}
+            {% endfor %}
         </div>
     </ul>
 
