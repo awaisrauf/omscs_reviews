@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 ---
 <!-- <!doctype html> -->
 <html lang="en">
@@ -23,7 +23,7 @@ layout: page
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-
+    
 <!-- my functions -->
 <script>
     function colorize(val, type) {
@@ -49,8 +49,7 @@ layout: page
             } else {
                 document.write('<span class="badge rounded-pill text-bg-danger"> Rating: '+ val +'</span>')
             }
-            break;
-        
+            break;     
     }
     }
     function get_semester_name(semester_id){
@@ -69,13 +68,14 @@ layout: page
 
 </head>
 
-<body>
-    <ul>
+
+<!-- <body> -->
+<div class='post'>
     {%- include search.html -%}
     <br>
     <!-- course stats -->
     <table class ='table'>
-        <tr>
+        <!-- <tr>
             <th>
                 Aliases
             </th>
@@ -88,7 +88,7 @@ layout: page
             <th>
                 Avg. Rating
             </th>
-        </tr>
+        </tr> -->
         <tr>
             <td>
                 {{ page.aliases }}
@@ -133,9 +133,6 @@ layout: page
             {% endif %}
             {% endfor %}
         </div>
-    </ul>
-
-
-</body>
+</div>
 
 </html>
