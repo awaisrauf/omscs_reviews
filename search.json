@@ -1,0 +1,15 @@
+---
+---
+[
+  {% for page in site.pages %}
+    {
+
+      "title"    : "{{ page.title | escape }}",
+      "url"      : "{{ site.baseurl }}{{ page.url }}",
+      "aliases" : "{{ page.aliases }}",
+      "id"     : "{{ page.course_id }}",
+      "number"     : "{{ page.course_number }}"
+
+    } {% unless forloop.last %},{% endunless %}
+  {% endfor %}
+]

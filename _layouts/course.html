@@ -30,7 +30,7 @@ layout: page
     // document.write('<span class="badge rounded-pill text-bg-success"> Success </span>');
     switch(type){
         case 'difficulty':
-            if (val < 2) {
+            if (val < 3) {
                 document.write('<span class="badge rounded-pill text-bg-success"> Difficulty: '+ val +'</span>')
             } else {
                 document.write('<span class="badge rounded-pill text-bg-danger"> Difficulty: '+ val +'</span>')
@@ -44,7 +44,7 @@ layout: page
             }
             break;
         case 'rating':
-            if (val > 2 ) {
+            if (val > 3 ) {
                 document.write('<span class="badge rounded-pill text-bg-success"> Rating: '+ val +'</span>')
             } else {
                 document.write('<span class="badge rounded-pill text-bg-danger"> Rating: '+ val +'</span>')
@@ -71,7 +71,8 @@ layout: page
 
 <body>
     <ul>
-
+    {%- include search.html -%}
+    <br>
     <!-- course stats -->
     <table class ='table'>
         <tr>

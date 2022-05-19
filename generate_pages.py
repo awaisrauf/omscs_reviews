@@ -31,7 +31,8 @@ for course in courses_data:
   course = dict(course)
   # course data
   course_id = course['id']
-  course_name = course['name']
+  course_number = course['number']
+  course_name = course['name'].replace(':', ' - ')
   course_aliases = get_courses_aliases(course['aliases'])
 
   # course avg stats
@@ -48,8 +49,9 @@ for course in courses_data:
   start = f'---\n'
   body1 = f'layout: course\ntitle: {course_id} - {course_name}\naliases: {course_aliases}\ncourse_id: {course_id}\npermalink: /{course_id}/\n'
   body2 = f'avg_difficulty: {avg_diff}\navg_rating: {avg_rating}\navg_workload: {avg_workload}\n'
+  body3 = f'course_number: {course_number}\n'
   end = '---'
-  content = start+body1+body2+end
+  content = start+body1+body2+body3+end
 
   with open('courses/'+course['id']+".md", 'w') as f:
       f.write(content)
