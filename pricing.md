@@ -5,4 +5,4 @@ type: 'about'
 permalink: /pricing/
 ---
 
-Just kidding 😆. Please consider donating to [Edhi Foundation](https://donate.edhi.org/product/donation/) doing great humantrain work in Pakistan.
+Just kidding 😆. Please consider donating to [Edhi Foundation](https://donate.edhi.org/product/donation/), doing great humanitarian work in Pakistan.
