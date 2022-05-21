@@ -8,7 +8,7 @@ A hastly put, temporary website for OMSCS reviews. All the reviews are taken fro
 
 Contributions are welcome on Github. If you want to contact me, please have a look at my [website](https://awaisrauf.github.io/).  
 
-## Progress
+## Progress and Support
 
 <head>
     <!-- Required meta tags -->
@@ -31,7 +31,15 @@ Contributions are welcome on Github. If you want to contact me, please have a lo
         crossorigin="anonymous"></script>
     <script src="/assets/make_charts.js" type="text/javascript"></script>
 </head>  
+
+You can support me by buying me a coffee.
+
+<a href="https://www.buymeacoffee.com/awaisrauf"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=awaisrauf&button_colour=FF5F5F&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00" /></a>
+
+
 Progress for more features is underway.
 <div class="progress">
   <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 55%"></div>
 </div>
+
+
