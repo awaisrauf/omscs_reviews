@@ -30,6 +30,32 @@ layout: default
     var pretty_aliases = pretty_aliases.replaceAll("\"", "")
     document.write(pretty_aliases)
   }
+  function colorize(val, type) {
+    // document.write('<span class="badge rounded-pill text-bg-success"> Success </span>');
+    switch(type){
+        case 'difficulty':
+            if (val < 3) {
+                document.write('<span class="badge rounded-pill text-bg-success">diff: '+ val +'</span>')
+            } else {
+                document.write('<span class="badge rounded-pill text-bg-danger">diff: '+ val +'</span>')
+            }
+            break;
+        case 'workload':
+            if (val < 15) {
+                document.write('<span class="badge rounded-pill text-bg-success">wl: '+ val +'</span>')
+            } else {
+                document.write('<span class="badge rounded-pill text-bg-danger">wl: '+ val +'</span>')
+            }
+            break;
+        case 'rating':
+            if (val > 3 ) {
+                document.write('<span class="badge rounded-pill text-bg-success">rating: '+ val +'</span>')
+            } else {
+                document.write('<span class="badge rounded-pill text-bg-danger">rating: '+ val +'</span>')
+            }
+            break;     
+    }
+  }
 </script>
 {%- include search.html -%}
 <br>
@@ -46,11 +72,17 @@ layout: default
     Course ID
   </th>
   <th>
+    Aliases
+  </th>
+  <th>
     Course Name
   </th>
   <th>
-     Aliases
-  </th>
+    Stats
+  </tr>
+
+
+
 </tr>
 
 {% for member in site.data.courses %}
@@ -63,9 +95,20 @@ layout: default
       <a href="{{ member.id | relative_url }}"> {{ member.name }} </a>
     </td>  
     <td>
-      <!-- {{ page.aliases }} -->
+    <!-- {{ page.aliases }} -->
       <script> get_pretty_aliases('{{ member.aliases }}') </script>
     </td>
+    <!-- ######## get course stats from pages -->
+    <!-- TODO: Better to do it in javascript -->
+    {% for page in site.pages %}
+      {% if page.course_id == member.id %}
+      <td>
+        <script> colorize('{{ page.avg_difficulty }}', 'difficulty'); colorize('{{ page.avg_workload }}', 'workload'); colorize('{{ page.avg_rating }}', 'rating'); </script>
+      </td>
+      {% endif %}
+    {% endfor %}
+    <!-- ################# -->
+
   {% endif %}
   </tr>
   {% endfor %}

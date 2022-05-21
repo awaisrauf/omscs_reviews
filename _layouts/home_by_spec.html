@@ -46,7 +46,32 @@ layout: default
 
         document.write(course_name)
     }
-
+  function colorize(val, type) {
+    // document.write('<span class="badge rounded-pill text-bg-success"> Success </span>');
+    switch(type){
+        case 'difficulty':
+            if (val < 3) {
+                document.write('<span class="badge rounded-pill text-bg-success">diff: '+ val +'</span>')
+            } else {
+                document.write('<span class="badge rounded-pill text-bg-danger">diff: '+ val +'</span>')
+            }
+            break;
+        case 'workload':
+            if (val < 15) {
+                document.write('<span class="badge rounded-pill text-bg-success">wl: '+ val +'</span>')
+            } else {
+                document.write('<span class="badge rounded-pill text-bg-danger">wl: '+ val +'</span>')
+            }
+            break;
+        case 'rating':
+            if (val > 3 ) {
+                document.write('<span class="badge rounded-pill text-bg-success">rate: '+ val +'</span>')
+            } else {
+                document.write('<span class="badge rounded-pill text-bg-danger">rate: '+ val +'</span>')
+            }
+            break;     
+    }
+  }
 </script>
 {%- include search.html -%}
 <br>
@@ -85,8 +110,20 @@ layout: default
                     <td>
                         {{ req.type }}
                     </td>
+                    <!-- ######## get course stats from pages -->
+                    <!-- TODO: Better to do it in javascript -->
+                    {% for page in site.pages %}
+                        {% if page.course_id == course %}
+                        <td>
+                            <script> colorize('{{ page.avg_difficulty }}', 'difficulty'); colorize('{{ page.avg_workload }}', 'workload'); colorize('{{ page.avg_rating }}', 'rating'); </script>
+                        </td>
+                        {% endif %}
+                    {% endfor %}
+                    <!-- ################# -->
+
                 </tr>
                 {% endfor %}
+   
         {% endfor %}
         </table>
         </details>

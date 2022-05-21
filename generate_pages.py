@@ -49,7 +49,8 @@ for course in courses_data:
   start = f'---\n'
   body1 = f'layout: course\ntitle: {course_id} - {course_name}\naliases: {course_aliases}\ncourse_id: {course_id}\npermalink: /{course_id}/\n'
   body2 = f'avg_difficulty: {avg_diff}\navg_rating: {avg_rating}\navg_workload: {avg_workload}\n'
-  body3 = f'course_number: {course_number}\n'
+  body3 = f'type: course_page\n'
+  body4 = f'course_number: {course_number}\n'
   end = '---'
   content = start+body1+body2+body3+end
 
