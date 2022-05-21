@@ -7,5 +7,5 @@ permalink: /INTA-8803G/
 avg_difficulty: 0
 avg_rating: 0
 avg_workload: 0
-course_number: 8803
+type: course_page
 ---

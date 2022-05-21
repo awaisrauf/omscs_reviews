@@ -1,0 +1,94 @@
+---
+layout: default
+---
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</head>
+
+<script>
+    // converts aliases str to useful one: '['A1', 'A2']' --> 'A1, A2'
+    function specs_data_processing(requirements) {
+        var obj = JSON.parse(requirements);
+        document.write(obj);
+        var reqs =  requirements.split('}, ');
+        for (d of reqs) {
+            document.write("this", d)
+        }
+        
+    }
+    function get_course_name(course_id, courses_data){
+        var course_name = 'none'
+        document.write(typeof(courses_data))
+        for (course_data of courses_data){
+            // console.log(course_data)
+            if (course_data['id'] == course_id){
+                course_name = course['name']
+            }
+        }
+
+        document.write(course_name)
+    }
+
+</script>
+{%- include search.html -%}
+<br>
+
+
+<!-- <h1> Course Reviews </h1> -->
+
+<div class="home">
+    {% for specialization_data in site.data.specializations_new %}
+        <h2>{{ specialization_data.name }}</h2>
+        <details> <summary>toggle to get the table</summary> 
+        <table class='table'>
+        {% assign req_types = specialization_data.requirements %}
+        {% for req in req_types %}
+            <!-- <h3> {{ req.type }}</h3> -->
+            {% assign courses =  req.courses %}
+                {% for course in courses %}
+                <!-- ################ Get course name-->
+                <!-- TODO: better to do it in javascript but javascript was taking data as str. -->
+                <!-- <script> get_course_name('{{ course }}', '{{ site.data.courses }}')</script> -->
+                {% for class_course in site.data.courses %}
+                    {% if course == class_course.id %}
+                        {% assign course_name = class_course.name %}
+                    {% endif %}
+                {% endfor  %}
+                 <!-- ################ -->
+
+                <tr>
+                    <td>
+                        {{ course }}
+                    </td>
+                    <td>
+ 
+                        <a href="{{ course | relative_url }}">  {{ course_name}} </a>
+                        </td>
+                    <td>
+                        {{ req.type }}
+                    </td>
+                </tr>
+                {% endfor %}
+        {% endfor %}
+        </table>
+        </details>
+    {% endfor %}
+</div>
