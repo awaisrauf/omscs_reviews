@@ -92,13 +92,14 @@ layout: default
                 <!-- ################ Get course name-->
                 <!-- TODO: better to do it in javascript but javascript was taking data as str. -->
                 <!-- <script> get_course_name('{{ course }}', '{{ site.data.courses }}')</script> -->
+                {% assign course_name = 'None' %}
                 {% for class_course in site.data.courses %}
                     {% if course == class_course.id %}
                         {% assign course_name = class_course.name %}
                     {% endif %}
                 {% endfor  %}
                  <!-- ################ -->
-
+                {% if course_name != 'None' %}
                 <tr>
                     <td>
                         {{ course }}
@@ -122,6 +123,7 @@ layout: default
                     <!-- ################# -->
 
                 </tr>
+                {% endif %}
                 {% endfor %}
    
         {% endfor %}
