@@ -42,4 +42,9 @@ Progress for more features is underway.
   <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 55%"></div>
 </div>
 
+## Updates
+
+- The new updates will be a bit delayed as I'm busy with the a course. 
+
+- Adding sortable tables. Any suggestions (through [redddit](https://www.reddit.com/r/OMSCS/comments/use33d/i_have_created_a_small_website_to_display/) or [Github](https://github.com/awaisrauf/omscs_reviews/issues)) is welcome.
 
