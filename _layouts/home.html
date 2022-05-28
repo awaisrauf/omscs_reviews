@@ -21,9 +21,29 @@ layout: default
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+  <!-- for sorted tables -->
+  <!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
+  <link href="  https://cdn.datatables.net/1.12.0/css/jquery.dataTables.min.css" rel="stylesheet"> -->
+<!-- DataTables CSS -->
+
+<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/tabletools/2.2.2/css/dataTables.tableTools.css">
+<script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>  
+<!-- DataTables -->
+<script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.js"></script>
+<script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/tabletools/2.2.2/js/dataTables.tableTools.min.js"></script>
 </head>
 
 <script>
+  // for sortable table
+  $(document).ready(function () {
+      $('#example').DataTable();
+      {
+        fixedHeader: true
+    }
+    });
+    
   // converts aliases str to useful one: '['A1', 'A2']' --> 'A1, A2'
   function get_pretty_aliases(aliases){
     var pretty_aliases = aliases.replace("[", "").replace("]", "")
@@ -34,24 +54,32 @@ layout: default
     // document.write('<span class="badge rounded-pill text-bg-success"> Success </span>');
     switch(type){
         case 'difficulty':
-            if (val < 3) {
-                document.write('<span class="badge rounded-pill text-bg-success">diff: '+ val +'</span>')
-            } else {
-                document.write('<span class="badge rounded-pill text-bg-danger">diff: '+ val +'</span>')
+            if (val <= 2) {
+                document.write('<span class="badge rounded-pill text-bg-success"> diff: '+ val +'</span>')
+            } 
+            else if (val <=3 ){
+                document.write('<span class="badge rounded-pill text-bg-warning"> diff: '+ val +'</span>')
+            }
+            else {
+                document.write('<span class="badge rounded-pill text-bg-danger"> diff: '+ val +'</span>')
             }
             break;
         case 'workload':
             if (val < 15) {
-                document.write('<span class="badge rounded-pill text-bg-success">wl: '+ val +'</span>')
+                document.write('<span class="badge rounded-pill text-bg-success"> wl: '+ val +'</span>')
             } else {
-                document.write('<span class="badge rounded-pill text-bg-danger">wl: '+ val +'</span>')
+                document.write('<span class="badge rounded-pill text-bg-danger"> wl: '+ val +'</span>')
             }
             break;
         case 'rating':
-            if (val > 3 ) {
-                document.write('<span class="badge rounded-pill text-bg-success">rating: '+ val +'</span>')
-            } else {
-                document.write('<span class="badge rounded-pill text-bg-danger">rating: '+ val +'</span>')
+            if (val >= 3.5 ) {
+                document.write('<span class="badge rounded-pill text-bg-success"> rating: '+ val +'</span>')
+            } 
+            else if (val >=2.5 ){
+                document.write('<span class="badge rounded-pill text-bg-warning"> rating: '+ val +'</span>')
+            }
+            else {
+                document.write('<span class="badge rounded-pill text-bg-danger"> rating: '+ val +'</span>')
             }
             break;     
     }
@@ -59,6 +87,10 @@ layout: default
 </script>
 {%- include search.html -%}
 <br>
+
+<div class="alert alert-warning" role="alert">
+  Sorted table is still in progress.
+</div>
 <!-- <h1> Course Reviews </h1> -->
 {% assign depts = "CS, ECE, CSE, ISYE, MGT, PUBP, VIP" | split: ", " %}
 
@@ -66,26 +98,25 @@ layout: default
 <div class="home">
 <!-- table header -->
 <h2> Courses from {{ dept }} Department </h2>
-<table class='table'>
+<table id='example' class='display'>
+  <thead>
 <tr>
   <th>
     Course ID
   </th>
   <th>
-    Aliases
+    Course Name
   </th>
   <th>
-    Course Name
+    Aliases
   </th>
   <th>
     Stats
   </tr>
-
-
-
-</tr>
+</thead>
 
 {% for member in site.data.courses %}
+<tbody>
   <tr>
   {% if member.deprecated != false and member.department == dept %}
     <td>
@@ -103,6 +134,7 @@ layout: default
     {% for page in site.pages %}
       {% if page.course_id == member.id %}
       <td>
+        <!-- {{ page.avg_difficulty }} -->
         <script> colorize('{{ page.avg_difficulty }}', 'difficulty'); colorize('{{ page.avg_workload }}', 'workload'); colorize('{{ page.avg_rating }}', 'rating'); </script>
       </td>
       {% endif %}
@@ -111,6 +143,7 @@ layout: default
 
   {% endif %}
   </tr>
+  </tbody>
   {% endfor %}
 </table>
 

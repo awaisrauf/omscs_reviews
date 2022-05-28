@@ -31,9 +31,13 @@ layout: default
     // document.write('<span class="badge rounded-pill text-bg-success"> Success </span>');
     switch(type){
         case 'difficulty':
-            if (val < 3) {
+            if (val <= 2) {
                 document.write('<span class="badge rounded-pill text-bg-success"> Difficulty: '+ val +'</span>')
-            } else {
+            } 
+            else if (val <=3 ){
+                document.write('<span class="badge rounded-pill text-bg-warning"> Difficulty: '+ val +'</span>')
+            }
+            else {
                 document.write('<span class="badge rounded-pill text-bg-danger"> Difficulty: '+ val +'</span>')
             }
             break;
@@ -45,9 +49,13 @@ layout: default
             }
             break;
         case 'rating':
-            if (val > 3 ) {
+            if (val >= 3.5 ) {
                 document.write('<span class="badge rounded-pill text-bg-success"> Rating: '+ val +'</span>')
-            } else {
+            } 
+            else if (val >=2.5 ){
+                document.write('<span class="badge rounded-pill text-bg-warning"> Rating: '+ val +'</span>')
+            }
+            else {
                 document.write('<span class="badge rounded-pill text-bg-danger"> Rating: '+ val +'</span>')
             }
             break;     
